@@ -48,7 +48,7 @@ export default <Props extends PageProps>(
       !Number.isNaN(itemsPerPage) &&
       itemsPerPage > 0;
 
-    if (currentPage > 0 && itemsPerPageValueIsValid) {
+    if (itemsPerPageValueIsValid) {
       updateCurrentPage(0);
     }
   }, [itemsPerPage]);

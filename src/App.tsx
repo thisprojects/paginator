@@ -59,7 +59,11 @@ function App() {
         <List arrayToPaginate={objArray} initialItemsPerPage={5} />
       </div>
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={7} />
+        <List
+          arrayToPaginate={objArray}
+          initialItemsPerPage={7}
+          zub={"Hello"}
+        />
       </div>
       <div className="listWrapper">
         <List arrayToPaginate={objArray} Î initialItemsPerPage={9} />
