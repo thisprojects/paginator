@@ -12,42 +12,46 @@ export default <Props extends PageProps>(
   Component: React.ComponentType<Props>
 ): React.ComponentType<Omit<Props, keyof PageProps>> => (props: PageProps) => {
   const { arrayToPaginate, initialItemsPerPage } = props;
-  const [perPage, updatePerPage] = useState(initialItemsPerPage);
+  const [itemsPerPage, updateItemsPerPage] = useState(initialItemsPerPage);
 
   const [pages, updatePages] = useState([]);
   const [currentPage, updateCurrentPage] = useState(0);
 
   useEffect(() => {
-    const perPageValueIsValid =
-      typeof perPage === "number" && !Number.isNaN(perPage) && perPage > 0;
+    const itemsPerPageValueIsValid =
+      typeof itemsPerPage === "number" &&
+      !Number.isNaN(itemsPerPage) &&
+      itemsPerPage > 0;
 
-    if (perPageValueIsValid) {
-      const pagesArray: unknown[] = [];
-      const arrayCopy = _.cloneDeep(arrayToPaginate);
-      const numberOfPages = arrayCopy.length / perPage;
+    if (itemsPerPageValueIsValid) {
+      const paginatedArray: unknown[] = [];
+      const copyOfArrayToPaginate = _.cloneDeep(arrayToPaginate);
+      const numberOfPages = copyOfArrayToPaginate.length / itemsPerPage;
 
       // produce paginated array.
       for (let pageCount = 0; pageCount < numberOfPages; pageCount++) {
-        pagesArray.push(arrayCopy.splice(0, perPage));
+        paginatedArray.push(copyOfArrayToPaginate.splice(0, itemsPerPage));
       }
 
       // if there are items remaining in the array copy, push them to the paginated array.
-      if (arrayCopy.length > 0) {
-        pagesArray.push(arrayCopy);
+      if (copyOfArrayToPaginate.length > 0) {
+        paginatedArray.push(copyOfArrayToPaginate);
       }
 
-      updatePages(pagesArray);
+      updatePages(paginatedArray);
     }
-  }, [initialItemsPerPage, perPage, arrayToPaginate]);
+  }, [initialItemsPerPage, itemsPerPage, arrayToPaginate]);
 
   useEffect(() => {
-    const perPageValueIsValid =
-      typeof perPage === "number" && !Number.isNaN(perPage) && perPage > 0;
+    const itemsPerPageValueIsValid =
+      typeof itemsPerPage === "number" &&
+      !Number.isNaN(itemsPerPage) &&
+      itemsPerPage > 0;
 
-    if (currentPage > 0 && perPageValueIsValid) {
+    if (currentPage > 0 && itemsPerPageValueIsValid) {
       updateCurrentPage(0);
     }
-  }, [perPage]);
+  }, [itemsPerPage]);
 
   const next = {
     enabled: currentPage + 1 < pages.length,
@@ -58,11 +62,12 @@ export default <Props extends PageProps>(
     },
   };
 
-  const itemsPerPage = {
-    current: perPage,
-    update(newPerPage) {
-      const newPerPageAsNumber = Number(newPerPage);
-      if (!Number.isNaN(newPerPageAsNumber)) updatePerPage(newPerPageAsNumber);
+  const numOfPages = {
+    current: itemsPerPage,
+    update(newitemsPerPage) {
+      const newitemsPerPageAsNumber = Number(newitemsPerPage);
+      if (!Number.isNaN(newitemsPerPageAsNumber))
+        updateItemsPerPage(newitemsPerPageAsNumber);
     },
   };
 
@@ -81,7 +86,7 @@ export default <Props extends PageProps>(
       newArray={pages[currentPage] || []}
       next={next}
       prev={prev}
-      itemsPerPage={itemsPerPage}
+      numOfPages={numOfPages}
     />
   );
 };

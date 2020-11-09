@@ -1,7 +1,7 @@
 import React from "react";
 import WithPaginator from "./WithPaginator";
 
-const List = ({ newArray, next, prev, itemsPerPage }): JSX.Element => {
+const List = ({ newArray, next, prev, numOfPages }): JSX.Element => {
   const ArrayToMap = () =>
     newArray.map((item) => (
       <>
@@ -10,7 +10,7 @@ const List = ({ newArray, next, prev, itemsPerPage }): JSX.Element => {
     ));
 
   const handleUpdate = (e: any) => {
-    itemsPerPage.update(Number(e.target.value));
+    numOfPages.update(Number(e.target.value));
   };
 
   const NextButton = () => {
@@ -38,7 +38,7 @@ const List = ({ newArray, next, prev, itemsPerPage }): JSX.Element => {
         <PrevButton />
         <label>
           Per Page
-          <input value={itemsPerPage.current} onChange={handleUpdate} />
+          <input value={numOfPages.current} onChange={handleUpdate} />
         </label>
         <NextButton />
       </div>
