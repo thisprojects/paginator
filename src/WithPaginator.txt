@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 
-// type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 interface PageProps {
-  arrayToPaginate: [];
+  arrayToPaginate: [{ entry: string }];
   initialItemsPerPage: number;
 }
 
 export default <Props extends PageProps>(
   Component: React.ComponentType<Props>
-): React.ComponentType<Omit<Props, keyof PageProps>> => (props: PageProps) => {
-  const { arrayToPaginate, initialItemsPerPage } = props;
+): React.ComponentType<Omit<Props, keyof PageProps>> => (props) => {
+  const { arrayToPaginate, initialItemsPerPage }: { PageProps } = props;
   const [itemsPerPage, updateItemsPerPage] = useState(initialItemsPerPage);
 
   const [pages, updatePages] = useState([]);

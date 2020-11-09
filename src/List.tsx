@@ -1,13 +1,27 @@
-import React from "react";
-import WithPaginator from "./WithPaginator";
+import React, { useEffect } from "react";
+import usePaginator from "./UsePagination";
 
-const List = ({ newArray, next, prev, numOfPages }): JSX.Element => {
-  const ArrayToMap = () =>
-    newArray.map((item) => (
-      <>
-        <p className="listItem">{item.entry}</p>
-      </>
-    ));
+interface Paginator {
+  paginatedArray: any[];
+  next: {
+    enabled: boolean;
+    page: any;
+  };
+  prev: {
+    enabled: boolean;
+    page: any;
+  };
+  numOfPages: {
+    current: number;
+    update: any;
+  };
+}
+
+const List = ({ arrayToPaginate, initialItemsPerPage }): JSX.Element => {
+  const { paginatedArray, next, prev, numOfPages }: Paginator = usePaginator(
+    arrayToPaginate,
+    initialItemsPerPage
+  );
 
   const handleUpdate = (e: any) => {
     numOfPages.update(Number(e.target.value));
@@ -32,7 +46,11 @@ const List = ({ newArray, next, prev, numOfPages }): JSX.Element => {
   return (
     <>
       <div className="list">
-        <ArrayToMap />
+        {paginatedArray.map((item) => (
+          <>
+            <p className="listItem">{item.entry}</p>
+          </>
+        ))}
       </div>
       <div className="controls">
         <PrevButton />
@@ -45,4 +63,4 @@ const List = ({ newArray, next, prev, numOfPages }): JSX.Element => {
     </>
   );
 };
-export default WithPaginator(List);
+export default List;
