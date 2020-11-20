@@ -2,76 +2,52 @@ import React from "react";
 import List from "./List";
 import "./App.css";
 
-const array = [
-  "one",
-  "two",
-  "three",
-  "four",
-  "five",
-  "six",
-  "seven",
-  "eight",
-  "nine",
-  "ten",
-  "eleven",
-  "twelve",
-  "thirteen",
-  "fourteen",
-  "fifteen",
-  "sixteen",
-  "seventeen",
-  "eighteen",
-  "nineteen",
-  "twenty",
-];
-
-const objArray = [
-  { entry: "one" },
-  { entry: "two" },
-  { entry: "three" },
-  { entry: "four" },
-  { entry: "five" },
-  { entry: "six" },
-  { entry: "seven" },
-  { entry: "eight" },
-  { entry: "nine" },
-  { entry: "ten" },
-  { entry: "eleven" },
-  { entry: "twelve" },
-  { entry: "thirteen" },
-  { entry: "fourteen" },
-  { entry: "fifteen" },
-  { entry: "sixteen" },
-  { entry: "seventeen" },
-  { entry: "eighteen" },
-  { entry: "nineteen" },
-  { entry: "twenty" },
-  { entry: "twentyOne" },
+const users = [
+  { name: "Bill", department: "Operations", office: "London" },
+  { name: "Joe", department: "HR", office: "London" },
+  { name: "Jules", department: "HR", office: "London" },
+  { name: "Debbie", department: "Comms", office: "Oxford" },
+  { name: "Donald", department: "Operations", office: "Oxford" },
+  { name: "Arthur", department: "Operations", office: "London" },
+  { name: "Gertie", department: "Comms", office: "London" },
+  { name: "Gerald", department: "Operations", office: "London" },
+  { name: "Rebecca", department: "Marketing", office: "Oxford" },
+  { name: "Benjamin", department: "Operations", office: "London" },
+  { name: "Alan", department: "Marketing", office: "London" },
+  { name: "Agnes", department: "Dispatch", office: "London" },
+  { name: "Georgina", department: "Dispatch", office: "Oxford" },
+  { name: "Karen", department: "Comms", office: "London" },
+  { name: "Steve", department: "Operations", office: "London" },
+  { name: "Andrew", department: "Accounts", office: "Oxford" },
+  { name: "David", department: "Accounts", office: "London" },
+  { name: "Sarah", department: "IT", office: "London" },
+  { name: "Claire", department: "IT", office: "Oxford" },
+  { name: "Robert", department: "Operations", office: "London" },
 ];
 
 function App() {
   return (
     <div className="App">
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={3} />
+        <List arrayToPaginate={users} initialItemsPerPage={3} />
       </div>
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={5} />
+        <List arrayToPaginate={users} initialItemsPerPage={5} />
       </div>
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={7} />
+        <List arrayToPaginate={users} initialItemsPerPage={7} />
       </div>
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={9} />
+        <List arrayToPaginate={users} initialItemsPerPage={9} />
       </div>
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={12} />
+        <List arrayToPaginate={users} initialItemsPerPage={12} />
       </div>
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={15} />
+        <List arrayToPaginate={users} initialItemsPerPage={15} />
       </div>
       <div className="listWrapper">
-        <List arrayToPaginate={objArray} initialItemsPerPage={21} />
+        <List arrayToPaginate={users} initialItemsPerPage={21} />
       </div>
     </div>
   );

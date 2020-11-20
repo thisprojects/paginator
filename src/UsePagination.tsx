@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, FunctionComponent } from "react";
 import _ from "lodash";
 
 export interface Paginator {
@@ -22,8 +22,8 @@ const usePagintor = (
 ) => {
   const [itemsPerPage, updateItemsPerPage] = useState(initialItemsPerPage);
 
-  const [pages, updatePages] = useState<any>([]);
-  const [currentPage, updateCurrentPage] = useState(0);
+  const [pages, updatePages] = useState<any[]>([]);
+  const [currentPage, updateCurrentPage] = useState<number>(0);
 
   useEffect(() => {
     const itemsPerPageValueIsValid =

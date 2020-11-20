@@ -5,10 +5,12 @@ interface HandleUpdate {
   target: HTMLInputElement;
 }
 
-type List = { paginatedArray: { entry: string }[] };
+type Users = { name: string; department: string; office: string };
+
+type List = { paginatedArray: Users[] };
 
 interface Args {
-  arrayToPaginate: { entry: string }[];
+  arrayToPaginate: Users[];
   initialItemsPerPage: number;
 }
 
@@ -42,11 +44,22 @@ const List = ({ arrayToPaginate, initialItemsPerPage }: Args): JSX.Element => {
 
   return (
     <>
-      <div className="list">
+      <div>
         {paginatedArray.map(
           (item): JSX.Element => (
             <>
-              <p className="listItem">{item.entry}</p>
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Department</th>
+                  <th>Office</th>
+                </tr>
+                <tr>
+                  <td>{item.name}</td>
+                  <td>{item.department}</td>
+                  <td>{item.office}</td>
+                </tr>
+              </table>
             </>
           )
         )}
