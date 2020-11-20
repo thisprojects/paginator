@@ -23,6 +23,7 @@ th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  width: 30%;
 }
 
 tr:nth-child(even) {
@@ -37,7 +38,6 @@ tr:nth-child(even) {
   display: flex;
   min-height: 300px;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 

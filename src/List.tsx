@@ -7,7 +7,7 @@ interface HandleUpdate {
 
 type Users = { name: string; department: string; office: string };
 
-type List = { paginatedArray: Users[] };
+type ArrayToPage = { paginatedArray: Users[] };
 
 interface Args {
   arrayToPaginate: Users[];
@@ -20,7 +20,10 @@ const List = ({ arrayToPaginate, initialItemsPerPage }: Args): JSX.Element => {
     next,
     prev,
     numOfPages,
-  }: Paginator & List = usePaginator(arrayToPaginate, initialItemsPerPage);
+  }: Paginator & ArrayToPage = usePaginator(
+    arrayToPaginate,
+    initialItemsPerPage
+  );
 
   const handleUpdate = (e: HandleUpdate) => {
     numOfPages.update(Number(e.target.value));
@@ -45,24 +48,24 @@ const List = ({ arrayToPaginate, initialItemsPerPage }: Args): JSX.Element => {
   return (
     <>
       <div>
-        {paginatedArray.map(
-          (item): JSX.Element => (
-            <>
-              <table>
-                <tr>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Office</th>
-                </tr>
+        <table>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Office</th>
+            </tr>
+            {paginatedArray.map(
+              (item): JSX.Element => (
                 <tr>
                   <td>{item.name}</td>
                   <td>{item.department}</td>
                   <td>{item.office}</td>
                 </tr>
-              </table>
-            </>
-          )
-        )}
+              )
+            )}
+          </tbody>
+        </table>
       </div>
       <div className="controls">
         <PrevButton />
