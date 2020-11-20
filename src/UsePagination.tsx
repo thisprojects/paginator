@@ -1,7 +1,25 @@
 import { useState, useEffect } from "react";
 import _ from "lodash";
 
-const usePagintor = (arrayToPaginate: [], initialItemsPerPage: number) => {
+export interface Paginator {
+  next: {
+    enabled: boolean;
+    page(): void;
+  };
+  prev: {
+    enabled: boolean;
+    page(): void;
+  };
+  numOfPages: {
+    current: number;
+    update(newItemsPerPage: string | number): void;
+  };
+}
+
+const usePagintor = (
+  arrayToPaginate: unknown[],
+  initialItemsPerPage: number
+) => {
   const [itemsPerPage, updateItemsPerPage] = useState(initialItemsPerPage);
 
   const [pages, updatePages] = useState<any>([]);
@@ -54,7 +72,7 @@ const usePagintor = (arrayToPaginate: [], initialItemsPerPage: number) => {
 
   const numOfPages = {
     current: itemsPerPage,
-    update(newitemsPerPage) {
+    update(newitemsPerPage: string | number) {
       const newitemsPerPageAsNumber = Number(newitemsPerPage);
       if (!Number.isNaN(newitemsPerPageAsNumber))
         updateItemsPerPage(newitemsPerPageAsNumber);

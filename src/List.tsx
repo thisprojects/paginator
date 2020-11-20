@@ -1,33 +1,30 @@
-import React, { useEffect } from "react";
-import usePaginator from "./UsePagination";
+import React from "react";
+import usePaginator, { Paginator } from "./UsePagination";
 
-interface Paginator {
-  paginatedArray: any[];
-  next: {
-    enabled: boolean;
-    page: any;
-  };
-  prev: {
-    enabled: boolean;
-    page: any;
-  };
-  numOfPages: {
-    current: number;
-    update: any;
-  };
+interface HandleUpdate {
+  target: HTMLInputElement;
 }
 
-const List = ({ arrayToPaginate, initialItemsPerPage }): JSX.Element => {
-  const { paginatedArray, next, prev, numOfPages }: Paginator = usePaginator(
-    arrayToPaginate,
-    initialItemsPerPage
-  );
+type List = { paginatedArray: { entry: string }[] };
 
-  const handleUpdate = (e: any) => {
+interface Args {
+  arrayToPaginate: { entry: string }[];
+  initialItemsPerPage: number;
+}
+
+const List = ({ arrayToPaginate, initialItemsPerPage }: Args): JSX.Element => {
+  const {
+    paginatedArray,
+    next,
+    prev,
+    numOfPages,
+  }: Paginator & List = usePaginator(arrayToPaginate, initialItemsPerPage);
+
+  const handleUpdate = (e: HandleUpdate) => {
     numOfPages.update(Number(e.target.value));
   };
 
-  const NextButton = () => {
+  const NextButton = (): JSX.Element => {
     if (next.enabled) {
       return <button onClick={next.page}>Next</button>;
     } else {
@@ -35,7 +32,7 @@ const List = ({ arrayToPaginate, initialItemsPerPage }): JSX.Element => {
     }
   };
 
-  const PrevButton = () => {
+  const PrevButton = (): JSX.Element => {
     if (prev.enabled) {
       return <button onClick={prev.page}>Prev</button>;
     } else {
@@ -46,11 +43,13 @@ const List = ({ arrayToPaginate, initialItemsPerPage }): JSX.Element => {
   return (
     <>
       <div className="list">
-        {paginatedArray.map((item) => (
-          <>
-            <p className="listItem">{item.entry}</p>
-          </>
-        ))}
+        {paginatedArray.map(
+          (item): JSX.Element => (
+            <>
+              <p className="listItem">{item.entry}</p>
+            </>
+          )
+        )}
       </div>
       <div className="controls">
         <PrevButton />
